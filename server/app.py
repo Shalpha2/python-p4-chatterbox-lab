@@ -18,13 +18,13 @@ CORS(app)
 def home():
     return '<h1>Chatterbox API</h1>'
 
-# GET /messages: returns all messages ordered by created_at ascending
+# GET
 @app.route('/messages', methods=['GET'])
 def get_messages():
     messages = Message.query.order_by(Message.created_at.asc()).all()
     return jsonify([msg.to_dict() for msg in messages]), 200
 
-# POST /messages: create a new message from form data
+# POST 
 @app.route('/messages', methods=['POST'])
 def create_message():
     data = request.get_json()
@@ -36,7 +36,7 @@ def create_message():
     db.session.commit()
     return jsonify(new_msg.to_dict()), 201
 
-# PATCH /messages/<int:id>: update the body of a message
+# PATCH 
 @app.route('/messages/<int:id>', methods=['PATCH'])
 def update_message(id):
     message = db.session.get(Message, id)
@@ -50,7 +50,7 @@ def update_message(id):
 
     return jsonify(message.to_dict()), 200
 
-# DELETE /messages/<int:id>: delete a message
+# DELETE 
 @app.route('/messages/<int:id>', methods=['DELETE'])
 def delete_message(id):
     message = db.session.get(Message, id)
@@ -58,7 +58,7 @@ def delete_message(id):
         return make_response({'error': 'Message not found'}, 404)
 
     db.session.delete(message)
-    db.session.commit()
+    db.session.commit()        
 
     return make_response({'message': 'Message deleted'}, 200)
 
