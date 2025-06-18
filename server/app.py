@@ -63,5 +63,5 @@ def delete_message(id):
     return make_response({'message': 'Message deleted'}, 200)
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=4000, debug=True)
 
